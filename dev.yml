@@ -1,0 +1,9 @@
+up:
+  - python: 3.6.4
+  - custom:
+      met?: 'false'
+      meet: pipenv install
+
+commands:
+  test:
+    run: pytest -v
