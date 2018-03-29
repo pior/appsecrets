@@ -1,9 +1,17 @@
 up:
   - python: 3.6.4
   - custom:
-      met?: 'false'
-      meet: pipenv install
+      met?: pipenv --bare sync
+      meet: pip install pipenv && pipenv --bare sync
+  - custom:
+      name: Install project in develop mode
+      met?: pip show ecfg 2> /dev/null
+      meet: pip install -e .
 
 commands:
+  lint:
+    run: pylama
   test:
     run: pytest -v
+  upload-release:
+    run: rm -rf dist && python setup.py sdist bdist_wheel && twine upload dist/*
