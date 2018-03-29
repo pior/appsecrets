@@ -5,7 +5,7 @@
 [![PythonVersions](https://img.shields.io/pypi/pyversions/appsecrets.svg)](https://pypi.python.org/pypi/appsecrets)
 [![Build](https://travis-ci.org/pior/appsecrets.svg?branch=master)](https://travis-ci.org/pior/appsecrets)
 
-Python 3.5+ library to manage your application secrets with [Google Cloud KMS](https://cloud.google.com/kms/)
+Python 3.6+ library to manage your application secrets with [Google Cloud KMS](https://cloud.google.com/kms/)
 
 
 ## Usage
