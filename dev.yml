@@ -5,7 +5,7 @@ up:
       meet: pip install pipenv && pipenv --bare sync
   - custom:
       name: Install project in develop mode
-      met?: pip show ecfg 2> /dev/null
+      met?: pip show appsecrets 2> /dev/null
       meet: pip install -e .
 
 commands:
