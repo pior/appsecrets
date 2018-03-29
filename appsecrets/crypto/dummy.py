@@ -1,7 +1,3 @@
-import base64
-
-import googleapiclient.discovery
-
 
 class Dummy(object):
     _MARKER = b'DUMMY'

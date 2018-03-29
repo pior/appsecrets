@@ -26,7 +26,9 @@ def test_cli(secretsdir):
     process = subprocess.run(['appsecrets', 'check', secretsdir])
     assert process.returncode == 0
 
-    process = subprocess.run(['appsecrets', 'decrypt', secretsdir, 'secret1'], stdout=subprocess.PIPE)
+    process = subprocess.run(
+        ['appsecrets', 'decrypt', secretsdir, 'secret1'],
+        stdout=subprocess.PIPE)
     assert process.stdout == b'MYSECRET'
 
 
