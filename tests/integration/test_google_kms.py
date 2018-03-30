@@ -8,6 +8,7 @@ def has_gcloud_creds():
     adc = '~/.config/gcloud/application_default_credentials.json'
     return os.path.exists(os.path.expanduser(adc))
 
+
 with_gcloud = pytest.mark.skipif(not has_gcloud_creds(), reason='Only with Gcloud creds')
 without_gcloud = pytest.mark.skipif(has_gcloud_creds(), reason='Only without Gcloud creds')
 

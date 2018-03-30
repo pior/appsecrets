@@ -20,13 +20,13 @@ class Cmd:
     @classmethod
     def run(cls, *args):
         proc = subprocess.run(['appsecrets', *args], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        assert proc.returncode == 0, f'Failed (code={proc.returncode})\nstdout: {proc.stdout}\nstderr: {proc.stderr}'
+        assert proc.returncode == 0, f'Failed (code={proc.returncode})\nout: {proc.stdout}\nserr: {proc.stderr}'
         return proc.stdout
 
     @classmethod
     def run_with_error(cls, *args):
         proc = subprocess.run(['appsecrets', *args], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        assert proc.returncode == 1, f'Didn\'t fail (code={proc.returncode})\nstdout: {proc.stdout}\nstderr: {proc.stderr}'
+        assert proc.returncode == 1, f'Didn\'t fail (code={proc.returncode})\nout: {proc.stdout}\nerr: {proc.stderr}'
         return proc.stderr
 
 
