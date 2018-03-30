@@ -6,7 +6,7 @@ import googleapiclient.errors
 
 import oauth2client.client
 
-from appsecrets.exc import Error
+from appsecrets.exc import Error, SecretError
 
 
 def handle_gcloud_error(func):

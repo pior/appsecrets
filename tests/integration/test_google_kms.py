@@ -24,7 +24,7 @@ def setup(secretsdir):
 def test_decrypt_invalid_secret(secretsdir, cmd):
     secretsdir.join('mysecret.enc').write(base64.b64encode(b'InvalidKMSData'))
     err = cmd.run_with_error('decrypt', secretsdir, 'mysecret')
-    assert b'invalid' in err
+    assert b'Secret "mysecret": Decryption failed: the ciphertext is invalid.\n' == err
 
 
 @with_gcloud
