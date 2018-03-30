@@ -71,7 +71,7 @@ class DirStore(object):
             with open(filepath, 'rb') as fh:
                 serialized = fh.read()
         except FileNotFoundError:
-            raise Error(f'This secret doesn\'t exist ({filepath})')
+            raise Error(f'This secret doesn\'t exist, or not encrypted yet ({filepath})')
 
         return base64.b64decode(serialized)
 
