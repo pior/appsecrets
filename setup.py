@@ -8,7 +8,7 @@ See `github repo <https://github.com/pior/appsecrets>`_ for information.
 
 setup(
     name='appsecrets',
-    version='0.1',
+    version='0.2',
     description='Manage your application secrets (with Google Cloud KMS)',
     long_description=description,
     classifiers=[
