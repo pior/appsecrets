@@ -22,10 +22,28 @@ def check(args):
         sys.exit(1)
 
 
+def create(args):
+    Secrets.create(args.path, key_id=args.google_kms)
+
+    print(f"""
+
+        You can now add a secret with:
+
+            $ echo -n 'SOMESECRETDATA' > {args.path}/my-secret-name
+            $ appsecrets encrypt {args.path}
+
+    """)
+
+
 def build_parser():
     parser = argparse.ArgumentParser()
 
     subparsers = parser.add_subparsers(dest='command')
+
+    sp = subparsers.add_parser('create', help='Create a appsecrets store')
+    sp.add_argument('path')
+    sp.add_argument('--google-kms', type=str, required=True, help='The Google KMS key resource id to use')
+    sp.set_defaults(func=create)
 
     sp = subparsers.add_parser('encrypt', help='Encrypt all secrets in plaintext')
     sp.add_argument('path')

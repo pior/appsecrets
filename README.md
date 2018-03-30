@@ -26,6 +26,12 @@ plaintext = secrets.decrypt('secret1')
 
 **Command line**
 
+Initialize the secret store:
+```bash
+$ appsecrets create secrets/production --google-kms projects/project-1/locations/global/keyRings/keyring1/cryptoKeys/key1
+```
+
+Or manually:
 ```bash
 $ mkdir -p secrets/production
 $ echo 'projects/project-1/locations/global/keyRings/keyring1/cryptoKeys/key1' > secrets/production/_google_kms_key_id
