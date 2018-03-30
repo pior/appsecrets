@@ -57,8 +57,14 @@ class DirStore(object):
         return [name for name in os.listdir(self._path) if not name.startswith('_')]
 
     def _read_cipher(self, name):
-        with open(os.path.join(self._path, name + '.enc'), 'rb') as fh:
-            serialized = fh.read()
+        filepath = os.path.join(self._path, name + '.enc')
+
+        try:
+            with open(filepath, 'rb') as fh:
+                serialized = fh.read()
+        except FileNotFoundError:
+            raise Error(f'This secret doesn\'t exist ({filepath})')
+
         return base64.b64decode(serialized)
 
     def _write_cipher(self, name, content):
