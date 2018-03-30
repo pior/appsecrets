@@ -23,12 +23,20 @@ class DirStore(object):
     def encrypt_inplace(self):
         for name in self.list_unencrypted():
             plaintext = self._read_plain(name)
-            ciphertext = self._crypto.encrypt(plaintext)
+
+            try:
+                ciphertext = self._crypto.encrypt(plaintext)
+            except Error as err:
+                raise Error(f'Secret "{name}": {err}')
+
             self._write_cipher(name, ciphertext)
             self._delete_plaintext(name)
 
     def decrypt(self, name):
-        return self._crypto.decrypt(self._read_cipher(name))
+        try:
+            return self._crypto.decrypt(self._read_cipher(name))
+        except Error as err:
+            raise Error(f'Secret "{name}": {err}')
 
     def list_encrypted(self):
         return [name for name in self._list_names() if name.endswith('.enc')]

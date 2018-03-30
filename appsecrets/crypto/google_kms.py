@@ -1,6 +1,7 @@
 import base64
 
 import googleapiclient.discovery
+import googleapiclient.errors
 
 from appsecrets.exc import Error
 
@@ -13,7 +14,11 @@ class GoogleKMS(object):
     def encrypt(self, plaintext):
         body = {'plaintext': base64.b64encode(plaintext).decode('ascii')}
 
-        response = self._api_resource.encrypt(name=self._key_id, body=body).execute()
+        try:
+            response = self._api_resource.encrypt(name=self._key_id, body=body).execute()
+        except googleapiclient.errors.HttpError as err:
+            raise Error(err._get_reason())
+
         payload = response.get('ciphertext')
         if payload is None:
             raise Error('Failed to encrypt secret with Google KMS')
@@ -23,7 +28,11 @@ class GoogleKMS(object):
     def decrypt(self, ciphertext):
         body = {'ciphertext': base64.b64encode(ciphertext).decode('ascii')}
 
-        response = self._api_resource.decrypt(name=self._key_id, body=body).execute()
+        try:
+            response = self._api_resource.decrypt(name=self._key_id, body=body).execute()
+        except googleapiclient.errors.HttpError as err:
+            raise Error(err._get_reason())
+
         payload = response.get('plaintext')
         if payload is None:
             raise Error('Failed to decrypt secret with Google KMS')
