@@ -55,12 +55,3 @@ def main():
         args.func(args)
     except Error as err:
         sys.exit(err)
-
-    # if args.command == 'encrypt':
-    #     Secrets(args.path).encrypt_all()
-
-    # elif args.command == 'decrypt':
-    #     Secrets(args.path).decrypt(name=args.secret_name)
-
-    # elif args.command == 'check-unencrypted':
-    #     Secrets(args.path).check_unencrypted()
