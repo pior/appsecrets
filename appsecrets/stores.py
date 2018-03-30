@@ -3,7 +3,7 @@ import os.path
 
 from .crypto.google_kms import GoogleKMS
 from .crypto.dummy import Dummy
-from .exc import Error
+from .exc import Error, SecretError
 
 
 def build(path):
@@ -26,7 +26,7 @@ class DirStore(object):
 
             try:
                 ciphertext = self._crypto.encrypt(plaintext)
-            except Error as err:
+            except SecretError as err:
                 raise Error(f'Secret "{name}": {err}')
 
             self._write_cipher(name, ciphertext)
@@ -35,7 +35,7 @@ class DirStore(object):
     def decrypt(self, name):
         try:
             return self._crypto.decrypt(self._read_cipher(name))
-        except Error as err:
+        except SecretError as err:
             raise Error(f'Secret "{name}": {err}')
 
     def list_encrypted(self):
@@ -71,7 +71,7 @@ class DirStore(object):
             with open(filepath, 'rb') as fh:
                 serialized = fh.read()
         except FileNotFoundError:
-            raise Error(f'This secret doesn\'t exist, or not encrypted yet ({filepath})')
+            raise SecretError(f'doesn\'t exist, or not encrypted yet ({filepath})')
 
         return base64.b64decode(serialized)
 
