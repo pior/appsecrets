@@ -43,4 +43,4 @@ def test_without_gcloud_credentials(secretsdir, cmd):
     secretsdir.join('mysecret').write(b'whatever')
 
     err = cmd.run_with_error('encrypt', secretsdir)
-    assert b'poipoipoi' in err
+    assert b'The Application Default Credentials are not available' in err
