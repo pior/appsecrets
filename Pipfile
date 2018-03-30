@@ -8,5 +8,6 @@ pytest = "*"
 twine = "*"
 pylama = "*"
 pytest-mock = "*"
+httpretty = "*"
 
 [dev-packages]
