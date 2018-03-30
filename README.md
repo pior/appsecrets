@@ -8,6 +8,25 @@
 Python 3.6+ library to manage your application secrets with [Google Cloud KMS](https://cloud.google.com/kms/)
 
 
+## How are my secrets stored?
+
+The secret store currently supported is [Google Cloud KMS](https://cloud.google.com/kms/).
+Other secret stores (like [EJSON](https://github.com/Shopify/ejson) or [AWS KMS](https://aws.amazon.com/kms/)) may
+be added (contributions are welcome).
+
+### Google KMS
+
+Google KMS is a service that manage encryption keys for you. It also offer API calls to encrypt/decrypt arbitrary
+payloads with those keys. The Google KMS key is identified by a "resource id".
+
+The secret store is a directory composed of:
+
+- a special file to store the key id (`_google_kms_key_id`)
+- files containing plaintext secrets
+- files containing encrypted secrets with an `.enc` extension
+- files prefixed with `_`, never encrypted
+
+
 ## Usage
 
 ```shell
