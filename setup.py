@@ -5,10 +5,12 @@ description = """
 See `github repo <https://github.com/pior/appsecrets>`_ for information.
 """
 
+VERSION = '0.2'
+
 
 setup(
     name='appsecrets',
-    version='0.2',
+    version=VERSION,
     description='Manage your application secrets (with Google Cloud KMS)',
     long_description=description,
     classifiers=[

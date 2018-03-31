@@ -15,5 +15,3 @@ commands:
     run: find . | grep -E "(__pycache__|\.pyc|\.pyo$)" | xargs rm -rf
   test:
     run: pytest -v
-  upload-release:
-    run: rm -rf dist && python setup.py sdist bdist_wheel && twine upload dist/*
