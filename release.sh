@@ -18,13 +18,25 @@ if [[ "$?" -ne 0 ]]; then
 	exit 1
 fi
 
-set -e
+git tag --list | egrep -q "^v${VERSION}$"
+if [[ "$?" -eq 0 ]]; then
+	echo "Error: a tag already exists for this version."
+	exit 1
+fi
 
-echo " ✭ create release commit"
-git commit --allow-empty -m "Release ${VERSION}"
+set -ex
 
-echo " ✭ create tag"
-git tag  -a "${VERSION}" -m "Release ${VERSION}"
+echo -e "\n ✭ update version in setup.py"
+sed -i '' "s/version='[^']*'/version='${VERSION}'/" setup.py
+sed -i '' "s/version=\"[^\"]*\"/version=\"${VERSION}\"/" setup.py
 
-echo " ✭ push to origin"
+exit 0
+
+echo -e "\n ✭ create release commit"
+git commit -m "Release v${VERSION}"
+
+echo -e "\n ✭ create tag"
+git tag  "${VERSION}"
+
+echo -e "\n ✭ push to origin"
 git push --follow-tags
