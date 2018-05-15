@@ -53,6 +53,6 @@ class GoogleKMS(object):
     @property
     def _api_resource(self):
         if self._resource_obj is None:
-            client = googleapiclient.discovery.build('cloudkms', 'v1')
+            client = googleapiclient.discovery.build('cloudkms', 'v1', cache_discovery=False)
             self._resource_obj = client.projects().locations().keyRings().cryptoKeys()
         return self._resource_obj
