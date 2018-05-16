@@ -57,8 +57,8 @@ class DirStore(object):
 
         raise Error("Missing key file")
 
-    def _read_key_id(self, type):
-        with open(os.path.join(self._path, '_%s_key_id' % type)) as fh:
+    def _read_key_id(self, crypto_id):
+        with open(os.path.join(self._path, '_%s_key_id' % crypto_id)) as fh:
             return fh.read().strip()
 
     def _list_names(self):

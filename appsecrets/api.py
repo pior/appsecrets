@@ -10,7 +10,7 @@ class Secrets(object):
         self._store = stores.build(path)
 
     @classmethod
-    def create(self, path, key_id):
+    def create(cls, path, key_id):
         path = pathlib.Path(path)
         if path.exists():
             raise Error(f'A secret store already exists at {path}')
