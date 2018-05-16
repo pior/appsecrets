@@ -18,7 +18,7 @@ class Secrets(object):
         path.mkdir(parents=True)
 
         key_id_path = path.joinpath('_google_kms_key_id')
-        key_id_path.write_text(key_id)
+        key_id_path.write_text(key_id)  # pylint: disable=no-member
 
     def encrypt_all(self):
         """Encrypt all cleartext secrets in place."""
