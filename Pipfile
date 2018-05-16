@@ -9,5 +9,6 @@ twine = "*"
 pytest-mock = "*"
 httpretty = "*"
 pylint = "*"
+pyreleaser = "*"
 
 [dev-packages]

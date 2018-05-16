@@ -71,3 +71,24 @@ Decrypt a single secret:
 ```bash
 $ appsecrets decrypt secrets/production secret1
 ```
+
+
+## Development
+
+PyReleaser uses [pior/Dad](https://github.com/pior/dad).
+
+If you don't want to use *Dad*, take a look at the file `dev.yml` to know how the project
+is setup/linted/tested/released.
+
+- Install [pior/Dad](https://github.com/pior/dad#install)
+- Run `dad up` to setup the development environment
+
+Create a new release:
+```
+$ dad release 0.4.0
+```
+
+Publish the release:
+```
+$ dad publish
+```
