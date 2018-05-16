@@ -4,3 +4,7 @@ class Error(Exception):
 
 class SecretError(Error):
     pass
+
+
+class CryptoError(Error):
+    pass
