@@ -17,7 +17,7 @@ def handle_gcloud_error(func):
         try:
             return func(*args, **kwds)
         except googleapiclient.errors.HttpError as err:
-            raise SecretError(err._get_reason())
+            raise SecretError(str(err))
         except oauth2client.client.ApplicationDefaultCredentialsError as err:
             raise Error(str(err))
         except httplib2.ServerNotFoundError as err:

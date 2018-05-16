@@ -6,8 +6,8 @@ name = "pypi"
 [packages]
 pytest = "*"
 twine = "*"
-pylama = "*"
 pytest-mock = "*"
 httpretty = "*"
+pylint = "*"
 
 [dev-packages]

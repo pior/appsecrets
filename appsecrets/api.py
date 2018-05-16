@@ -10,7 +10,7 @@ class Secrets(object):
         self._store = stores.build(path)
 
     @classmethod
-    def create(self, path, key_id):
+    def create(cls, path, key_id):
         path = pathlib.Path(path)
         if path.exists():
             raise Error(f'A secret store already exists at {path}')
@@ -18,7 +18,7 @@ class Secrets(object):
         path.mkdir(parents=True)
 
         key_id_path = path.joinpath('_google_kms_key_id')
-        key_id_path.write_text(key_id)
+        key_id_path.write_text(key_id)  # pylint: disable=no-member
 
     def encrypt_all(self):
         """Encrypt all cleartext secrets in place."""
