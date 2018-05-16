@@ -10,7 +10,7 @@ up:
 
 commands:
   lint:
-    run: pylama
+    run: pylint --rcfile=pylintrc setup.py appsecrets
   clean:
     run: find . | grep -E "(__pycache__|\.pyc|\.pyo$)" | xargs rm -rf
   test:
