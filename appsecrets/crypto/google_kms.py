@@ -4,9 +4,11 @@ import base64
 import googleapiclient.discovery
 import googleapiclient.errors
 
+import httplib2
+
 import oauth2client.client
 
-from appsecrets.exc import Error, SecretError
+from appsecrets.exc import Error, SecretError, CryptoError
 
 
 def handle_gcloud_error(func):
@@ -18,6 +20,8 @@ def handle_gcloud_error(func):
             raise SecretError(err._get_reason())
         except oauth2client.client.ApplicationDefaultCredentialsError as err:
             raise Error(str(err))
+        except httplib2.ServerNotFoundError as err:
+            raise CryptoError(str(err))
     return wrapper
 
 

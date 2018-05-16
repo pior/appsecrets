@@ -1,6 +1,8 @@
+import socket
+
 import pytest
 
-from appsecrets.exc import Error
+from appsecrets.exc import Error, CryptoError
 from appsecrets.crypto.google_kms import GoogleKMS
 
 
@@ -34,3 +36,13 @@ def test_decrypt_failed(mocker):
 
     with pytest.raises(Error):
         GoogleKMS('testkeyid').decrypt(b'CIPHER')
+
+
+def test_network_error(mocker):
+    m_socket = mocker.patch('socket.socket', autospec=True)
+    m_socket.side_effect = socket.gaierror('TEST')
+
+    with pytest.raises(CryptoError) as exc_info:
+        GoogleKMS('testkeyid').decrypt(b'CIPHER')
+
+    assert str(exc_info.value) == 'Unable to find the server at www.googleapis.com'
