@@ -10,5 +10,6 @@ pytest-mock = "*"
 httpretty = "*"
 pylint = "*"
 pyreleaser = "*"
+"oauth2client" = "*"
 
 [dev-packages]
