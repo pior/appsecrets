@@ -75,12 +75,12 @@ $ appsecrets decrypt secrets/production secret1
 
 ## Development
 
-AppSecrets uses [devbuddy](https://github.com/devbuddy/devbuddy).
+AppSecrets uses [DevBuddy](https://github.com/devbuddy/devbuddy).
 
 If you don't want to use *DevBuddy*, take a look at the file `dev.yml` to know how the project
 is setup/linted/tested/released.
 
-- Install [devbuddy](https://github.com/devbuddy/devbuddy#install)
+- Install [DevBuddy](https://github.com/devbuddy/devbuddy#install)
 - Run `bud up` to setup the development environment
 
 Run the tests:

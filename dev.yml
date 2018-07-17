@@ -1,12 +1,7 @@
 up:
   - python: 3.6.4
-  - custom:
-      met?: pipenv --bare sync
-      meet: pip install pipenv && pipenv --bare sync
-  - custom:
-      name: Install project in develop mode
-      met?: pip show appsecrets > /dev/null 2> /dev/null
-      meet: pip install -e .
+  - python_develop
+  - pipfile
 
 commands:
   lint:
