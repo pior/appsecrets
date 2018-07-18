@@ -6,8 +6,6 @@ import googleapiclient.errors
 
 import httplib2
 
-import oauth2client.client
-
 from appsecrets.exc import Error, SecretError, CryptoError
 
 
@@ -18,8 +16,6 @@ def handle_gcloud_error(func):
             return func(*args, **kwds)
         except googleapiclient.errors.HttpError as err:
             raise SecretError(str(err))
-        except oauth2client.client.ApplicationDefaultCredentialsError as err:
-            raise Error(str(err))
         except httplib2.ServerNotFoundError as err:
             raise CryptoError(str(err))
     return wrapper
