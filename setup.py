@@ -27,7 +27,9 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     zip_safe=False,
-    install_requires=['google-api-python-client'],
+    install_requires=[
+        'google-api-python-client ~= 1.7.0',
+    ],
     entry_points={
         'console_scripts': ['appsecrets = appsecrets.cli:main'],
     },
