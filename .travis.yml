@@ -11,5 +11,5 @@ install:
 
 script:
   - rm -rf dist && python setup.py sdist && pip install dist/*.tar.gz
-  - pytest -v
+  - pytest -vv
   - pylint --rcfile=pylintrc setup.py appsecrets
