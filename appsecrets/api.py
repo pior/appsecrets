@@ -4,7 +4,7 @@ from . import stores
 from .exc import Error
 
 
-class Secrets(object):
+class Secrets:
     def __init__(self, path):
         self._path = path
         self._store = stores.build(path)

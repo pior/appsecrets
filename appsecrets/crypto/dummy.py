@@ -1,5 +1,5 @@
 
-class Dummy(object):
+class Dummy:
     _MARKER = b'DUMMY'
 
     def __init__(self, key_id):

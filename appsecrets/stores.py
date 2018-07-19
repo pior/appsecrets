@@ -15,7 +15,7 @@ def build(path):
     return DirStore(path)
 
 
-class DirStore(object):
+class DirStore:
     def __init__(self, path):
         self._path = path
         self._crypto = self._load_crypto()

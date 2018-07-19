@@ -25,7 +25,7 @@ def handle_gcloud_error(func):
     return wrapper
 
 
-class GoogleKMS(object):
+class GoogleKMS:
     def __init__(self, key_id):
         self._key_id = key_id
         self._resource_obj = None
