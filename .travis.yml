@@ -8,16 +8,12 @@ sudo: true
 python:
   - "3.6"
   - "3.7"
-env:
-  - GOOGLE_API_CLIENT_VERSION=1.7.0
-  - GOOGLE_API_CLIENT_VERSION=1.7.4
 
 cache: pip
 
 install:
   - pip install -U pip && pip install -U setuptools pipenv
   - pipenv --bare install
-  - pip install "google-api-python-client == ${GOOGLE_API_CLIENT_VERSION}"
 
 script:
   - rm -rf dist && python setup.py sdist && pip install dist/*.tar.gz
