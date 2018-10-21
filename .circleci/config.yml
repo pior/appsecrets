@@ -1,0 +1,47 @@
+version: 2.1
+
+commands:
+  test:
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+          - v1-{{ checksum "setup.py" }}-{{ checksum "Pipfile" }}
+          - v1-
+
+      - run:
+          name: install dependencies
+          command: |
+            pipenv install --dev --skip-lock
+            pipenv run pip install -e .
+
+      - save_cache:
+          paths:
+            - ~/.cache/pipenv
+            - ~/.cache/pip
+          key: v1-{{ checksum "setup.py" }}-{{ checksum "Pipfile" }}
+
+      - run:
+          name: run tests
+          command: |
+            pipenv run pytest -v
+
+jobs:
+  py36:
+    docker:
+      - image: circleci/python:3.6.6
+    steps:
+      - test
+  py37:
+    docker:
+      - image: circleci/python:3.7.0
+    steps:
+      - test
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - py36
+      - py37
