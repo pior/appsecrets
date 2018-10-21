@@ -5,7 +5,7 @@ description = """
 See `github repo <https://github.com/pior/appsecrets>`_ for information.
 """
 
-VERSION = '0.4'  # maintained by release tool
+VERSION = '0.5'  # maintained by release tool
 
 
 setup(
