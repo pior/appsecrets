@@ -20,7 +20,7 @@ setup(
         "Programming Language :: Python :: 3.7",
         "License :: OSI Approved :: MIT License",
     ],
-    keywords='secrets kms crypto',
+    keywords='secrets kms crypto config ejson',
     author="Pior Bastida",
     author_email="pior@pbastida.net",
     url="https://github.com/pior/appsecrets",
