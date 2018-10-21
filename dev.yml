@@ -1,6 +1,5 @@
 up:
   - python: 3.6.4
-  - python_develop
   - pipfile
 
 commands:

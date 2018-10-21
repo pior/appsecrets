@@ -11,5 +11,6 @@ httpretty = "*"
 pylint = "*"
 pyreleaser = "*"
 mypy = "*"
+"e1839a8" = {path = ".", extras = ["ejson"], editable = true}
 
 [dev-packages]

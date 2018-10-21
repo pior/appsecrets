@@ -31,6 +31,9 @@ setup(
     install_requires=[
         'google-api-python-client ~= 1.7.0',
     ],
+    extras_require={
+        'ejson': ['PyNaCl ~= 1.3.0'],
+    },
     entry_points={
         'console_scripts': ['appsecrets = appsecrets.cli:main'],
     },
