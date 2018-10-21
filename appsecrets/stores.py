@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import Sequence
 
 from .crypto import _Crypto
+from .crypto.ejson import EJSON
 from .crypto.google_kms import GoogleKMS
 from .crypto.dummy import Dummy
 from .exc import Error, SecretError
@@ -39,9 +40,46 @@ def build(path: str) -> _Store:
     if not Path(path).exists():
         raise Error("The specified path doesn't exist: %s" % path)
 
+    if path.endswith('.ejson'):
+        return EJSONStore(path)
+
     if not Path(path).is_dir():
         raise Error("The only supported secret store is a directory")
     return DirStore(path)
+
+
+class EJSONStore(_Store):
+
+    def __init__(self, path: str) -> None:
+        self._path = path
+        self._crypto = self._load_crypto()
+
+    def encrypt_inplace(self) -> None:
+        raise NotImplementedError()
+
+    def decrypt(self, name: str) -> bytes:
+        content = self._load()
+        try:
+            encrypted = content[name]
+        except KeyError:
+            raise SecretNotFound(name)
+        return self._crypto.decrypt(bytes(encrypted, 'utf-8'))
+
+    def list_encrypted(self) -> Sequence[str]:
+        raise NotImplementedError()
+
+    def list_unencrypted(self) -> Sequence[str]:
+        raise NotImplementedError()
+
+    def _load(self) -> dict:
+        data = json.loads(Path(self._path).read_bytes())
+        assert isinstance(data, dict)
+        return data
+
+    def _load_crypto(self) -> _Crypto:
+        public_key = self._load()['_public_key']
+        return EJSON(public_key=public_key)
+
 
 
 class DirStore(_Store):
@@ -109,6 +147,3 @@ class DirStore(_Store):
 
     def _encrypted_secret_file(self, name: str) -> Path:
         return Path(self._path).joinpath(name + '.enc')
-
-
-

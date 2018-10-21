@@ -20,7 +20,7 @@ setup(
         "Programming Language :: Python :: 3.7",
         "License :: OSI Approved :: MIT License",
     ],
-    keywords='secrets kms crypto',
+    keywords='secrets kms crypto config ejson',
     author="Pior Bastida",
     author_email="pior@pbastida.net",
     url="https://github.com/pior/appsecrets",
@@ -31,6 +31,9 @@ setup(
     install_requires=[
         'google-api-python-client ~= 1.7.0',
     ],
+    extras_require={
+        'ejson': ['PyNaCl ~= 1.3.0'],
+    },
     entry_points={
         'console_scripts': ['appsecrets = appsecrets.cli:main'],
     },
