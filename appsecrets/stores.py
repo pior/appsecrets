@@ -44,41 +44,6 @@ def build(path: str) -> _Store:
     return DirStore(path)
 
 
-class EJSONStore(_Store):
-
-    def __init__(self, path: str) -> None:
-        self._path = path
-        self._crypto = self._load_crypto()
-
-    def encrypt_inplace(self) -> None:
-        raise NotImplementedError()
-
-    def decrypt(self, name: str) -> bytes:
-        content = self._load()
-        try:
-            encrypted = content[name]
-        except KeyError:
-            raise SecretNotFound(name)
-        return self._crypto.decrypt(encrypted)
-
-    def list_encrypted(self) -> Sequence[str]:
-        raise NotImplementedError()
-
-    def list_unencrypted(self) -> Sequence[str]:
-        raise NotImplementedError()
-
-    def _load(self) -> dict:
-        with open(self._path) as fh:
-            data = json.load(fh)
-        assert isinstance(data, dict)
-        return data
-
-    def _load_crypto(self) -> _Crypto:
-        public_key = self._load()['_public_key']
-        return EJSON(public_key=public_key)
-
-
-
 class DirStore(_Store):
     def __init__(self, path: str) -> None:
         self._path = path
