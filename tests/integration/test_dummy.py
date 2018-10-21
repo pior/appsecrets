@@ -45,7 +45,7 @@ def test_decrypt(secretsdir, cmd):
 
 def test_decrypt_unknown_secret(secretsdir, cmd):
     err = cmd.run_with_error('decrypt', secretsdir, 'not-found')
-    assert b"doesn't exist" in err
+    assert b"does not exist" in err
 
 
 def test_api_encrypt_all(secretsdir):
