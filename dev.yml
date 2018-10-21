@@ -6,6 +6,8 @@ up:
 commands:
   lint:
     run: pylint --rcfile=pylintrc setup.py appsecrets
+  typing:
+    run: mypy appsecrets
   clean:
     run: find . | grep -E "(__pycache__|\.pyc|\.pyo$)" | xargs rm -rf
   test:

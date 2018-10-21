@@ -10,5 +10,6 @@ pytest-mock = "*"
 httpretty = "*"
 pylint = "*"
 pyreleaser = "*"
+mypy = "*"
 
 [dev-packages]

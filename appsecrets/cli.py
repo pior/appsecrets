@@ -5,24 +5,24 @@ from .api import Secrets
 from .exc import Error
 
 
-def encrypt(args):
+def encrypt(args: argparse.Namespace) -> None:
     Secrets(args.path).encrypt_all()
     print("Secrets in %s are now all encrypted" % args.path)
 
 
-def decrypt(args):
+def decrypt(args: argparse.Namespace) -> None:
     plaintext = Secrets(args.path).decrypt(name=args.name)
     print(plaintext.decode('utf-8'), end='')
 
 
-def check(args):
+def check(args: argparse.Namespace) -> None:
     names = Secrets(args.path).list_unencrypted()
-    if names:
+    if len(names) > 0:
         print("Error: secrets in plaintext: %s" % ', '.join(names))
         sys.exit(1)
 
 
-def create(args):
+def create(args: argparse.Namespace) -> None:
     Secrets.create(args.path, key_id=args.google_kms)
 
     print(f"""
@@ -35,7 +35,7 @@ def create(args):
     """)
 
 
-def build_parser():
+def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser()
 
     subparsers = parser.add_subparsers(dest='command')
@@ -61,7 +61,7 @@ def build_parser():
     return parser
 
 
-def main():
+def main() -> None:
     parser = build_parser()
     args = parser.parse_args()
 
