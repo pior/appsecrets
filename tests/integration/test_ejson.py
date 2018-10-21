@@ -35,13 +35,13 @@ def setup_keydir(tmpdir, secretsdir, ejsonfile, monkeypatch):
 
 
 def test_encrypt(secretsdir, ejsonfile, cmd):
-    value = appsecrets.Secrets(path=str(ejsonfile)).decrypt('encrypted')
-    assert value == 'SECRET'
+    with pytest.raises(NotImplementedError):
+        appsecrets.Secrets(path=str(ejsonfile)).encrypt_all()
 
 
 def test_decrypt(secretsdir, ejsonfile, cmd):
     value = appsecrets.Secrets(path=str(ejsonfile)).decrypt('encrypted')
-    assert value == 'SECRET'
+    assert value == b'SECRET'
 
 
 def test_file_not_found(secretsdir, cmd):

@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import Sequence
 
 from .crypto import _Crypto
+from .crypto.ejson import EJSON
 from .crypto.google_kms import GoogleKMS
 from .crypto.dummy import Dummy
 from .exc import Error, SecretError
@@ -62,7 +63,7 @@ class EJSONStore(_Store):
             encrypted = content[name]
         except KeyError:
             raise SecretNotFound(name)
-        return self._crypto.decrypt(encrypted)
+        return self._crypto.decrypt(bytes(encrypted, 'utf-8'))
 
     def list_encrypted(self) -> Sequence[str]:
         raise NotImplementedError()
@@ -71,8 +72,7 @@ class EJSONStore(_Store):
         raise NotImplementedError()
 
     def _load(self) -> dict:
-        with open(self._path) as fh:
-            data = json.load(fh)
+        data = json.loads(Path(self._path).read_bytes())
         assert isinstance(data, dict)
         return data
 
