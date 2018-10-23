@@ -34,7 +34,7 @@ def test_list_secrets(secretsdir):
     secrets = appsecrets.Secrets(str(secretsdir))
 
     result = secrets.list_encrypted()
-    assert result == ['sec1', 'sec2']
+    assert set(result) == set(['sec1', 'sec2'])
 
     result = secrets.list_unencrypted()
     assert result == ['sec3']
