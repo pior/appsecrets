@@ -45,6 +45,12 @@ def build(path: str) -> _Store:
 
 
 class DirStore(_Store):
+    """Store secrets as files in a directory.
+
+    The files are named after the secret name, suffixed by '.enc' if encrypted.
+    The encrypted value is encoded with base64.
+    """
+
     def __init__(self, path: str) -> None:
         self._path = path
         self._crypto = self._load_crypto()
@@ -68,7 +74,7 @@ class DirStore(_Store):
             raise Error(f'Secret "{name}": {err}')
 
     def list_encrypted(self) -> Sequence[str]:
-        return [name for name in self._list_names() if name.endswith('.enc')]
+        return [name[:-4] for name in self._list_names() if name.endswith('.enc')]
 
     def list_unencrypted(self) -> Sequence[str]:
         return [name for name in self._list_names() if not name.endswith('.enc')]
