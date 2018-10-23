@@ -60,3 +60,16 @@ def test_decrypt(secretsdir, cmd, test_value):
 
     decrypted = secrets.decrypt('sec1')
     assert decrypted == test_value
+
+
+def test_encrypt_in_test_mode(secretsdir, cmd):
+    with pytest.raises(appsecrets.exc.Error) as exc:
+        appsecrets.Secrets(str(secretsdir), test_mode=True).encrypt_all()
+    assert 'Can not encrypt secrets in test-mode' == str(exc.value)
+
+
+def test_decrypt_in_test_mode(secretsdir, cmd):
+    secretsdir.join('mysecret.enc').write(b'whatever')
+
+    value = appsecrets.Secrets(str(secretsdir), test_mode=True).decrypt('mysecret')
+    assert value == 'test-mode-mysecret'
