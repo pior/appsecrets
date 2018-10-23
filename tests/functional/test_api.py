@@ -72,4 +72,4 @@ def test_decrypt_in_test_mode(secretsdir, cmd):
     secretsdir.join('mysecret.enc').write(b'whatever')
 
     value = appsecrets.Secrets(str(secretsdir), test_mode=True).decrypt('mysecret')
-    assert value == 'test-mode-mysecret'
+    assert value == b'test-mode-mysecret'

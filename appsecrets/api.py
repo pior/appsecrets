@@ -18,7 +18,7 @@ class Secrets:
     only access existing secrets.
     """
 
-    def __init__(self, path: str, test_mode=False) -> None:
+    def __init__(self, path: str, test_mode: bool = False) -> None:
         self._path = path
         self._store = stores.build(path)
         self._test_mode = test_mode
@@ -45,7 +45,7 @@ class Secrets:
         """Decrypt and return a secrets."""
         if self._test_mode:
             if name in self._store.list_encrypted():
-                return f'test-mode-{name}'
+                return b'test-mode-' + bytes(name, 'utf-8')
             raise SecretNotFound(name)
 
         return self._store.decrypt(name)
