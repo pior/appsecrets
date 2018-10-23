@@ -38,5 +38,4 @@ class Secrets:
         return self._store.list_unencrypted()
 
     def __repr__(self) -> str:
-        store_type = str(type(self._store))
-        return f'Appsecret({store_type}) at {self._path}'
+        return f'Secrets({self._path!r})'
