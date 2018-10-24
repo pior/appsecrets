@@ -26,6 +26,7 @@ setup(
     url="https://github.com/pior/appsecrets",
     license="MIT",
     packages=find_packages(),
+    package_data={'appsecrets': ['py.typed']},
     include_package_data=True,
     zip_safe=False,
     install_requires=[
