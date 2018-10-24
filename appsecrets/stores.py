@@ -10,12 +10,6 @@ from .crypto.dummy import Dummy
 from .exc import Error, SecretError
 
 
-class SecretNotFound(Error):
-
-    def __init__(self, name: str) -> None:
-        super().__init__(f'Secret "{name}": not found')
-
-
 class _Store(abc.ABC):
 
     @abc.abstractmethod
@@ -115,6 +109,3 @@ class DirStore(_Store):
 
     def _encrypted_secret_file(self, name: str) -> Path:
         return Path(self._path).joinpath(name + '.enc')
-
-
-
