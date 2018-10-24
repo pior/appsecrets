@@ -15,6 +15,7 @@ commands:
           command: |
             pipenv install --dev --skip-lock
             pipenv run pip install -e .
+            pipenv run pip list
 
       - save_cache:
           paths:
